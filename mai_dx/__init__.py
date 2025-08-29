@@ -4,7 +4,7 @@ from mai_dx.main import MaiDxOrchestrator
 from mai_dx.state import DiagnosisResult, DiagnosticAction as Action, AgentRole
 
 __version__ = "1.0.0"
-__author__ = "The Swarm Corporation"
+__author__ = "MAI-DxO Contributors"
 __description__ = "AI-powered diagnostic system with virtual physician panels"
 
 # Main exports

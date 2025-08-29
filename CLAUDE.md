@@ -8,7 +8,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 # Install dependencies (use one of these)
 pip install -r requirements.txt
-pip install mai-dx  # For using as a package
 pip install -e .    # For development mode
 ```
 
@@ -33,7 +32,7 @@ python example.py
 
 ## Architecture Overview
 
-This is an implementation of Microsoft Research's "Sequential Diagnosis with Language Models" paper, built using LangGraph for state-managed multi-agent orchestration. The system coordinates a virtual panel of 8 specialized AI physician agents to perform iterative medical diagnosis with robust state management.
+This is an implementation of Microsoft Research's "Sequential Diagnosis with Language Models" paper, built using LangGraph for state-managed multi-agent orchestration. The system coordinates a virtual panel of 8 specialized AI physician agents to perform iterative medical diagnosis with robust state management and workflow orchestration.
 
 ### Core Components
 
@@ -101,12 +100,13 @@ Optional:
 
 ## Key Implementation Details
 
-- The system uses the Swarms framework for agent orchestration
+- The system uses LangGraph StateGraph for agent orchestration and state management
 - All agents are created with specific token-optimized prompts to reduce latency
 - Test costs are stored in a comprehensive database (`test_cost_db`)
-- Budget tracking happens in real-time during diagnostic iterations
+- Budget tracking happens in real-time during diagnostic iterations with automatic state persistence
 - The Judge agent uses a 5-point Likert scale for accuracy evaluation
-- Conversation history is maintained for full diagnostic trail
+- Conversation history is maintained for full diagnostic trail through centralized state management
+- Built-in checkpointing allows for workflow resumability and debugging
 
 ## Dependencies
 

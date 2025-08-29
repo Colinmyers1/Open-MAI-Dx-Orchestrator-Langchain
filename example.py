@@ -1,4 +1,4 @@
-from mai_dx import MaiDxOrchestrator
+from mai_dx.main import MaiDxOrchestrator
 from loguru import logger
 
 if __name__ == "__main__":

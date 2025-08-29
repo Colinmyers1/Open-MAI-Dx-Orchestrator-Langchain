@@ -1,8 +1,8 @@
 # MAI Diagnostic Orchestrator (MAI-DxO)
 
-> **An open-source implementation of Microsoft Research's "Sequential Diagnosis with Language Models" paper, built with the Swarms AI framework.**
+> **An open-source implementation of Microsoft Research's "Sequential Diagnosis with Language Models" paper, built with LangGraph for state-managed multi-agent orchestration.**
 
-MAI-DxO (MAI Diagnostic Orchestrator) is a sophisticated AI-powered diagnostic system that simulates a virtual panel of physician-agents to perform iterative medical diagnosis with cost-effectiveness optimization. This implementation faithfully reproduces the methodology described in the Microsoft Research paper while providing additional features and flexibility.
+MAI-DxO (MAI Diagnostic Orchestrator) is a sophisticated AI-powered diagnostic system that simulates a virtual panel of physician-agents to perform iterative medical diagnosis with cost-effectiveness optimization. This implementation faithfully reproduces the methodology described in the Microsoft Research paper while leveraging LangGraph's powerful state management and workflow orchestration capabilities.
 
 [![Paper](https://img.shields.io/badge/Paper-arXiv:2506.22405-red.svg)](https://arxiv.org/abs/2506.22405)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -10,39 +10,44 @@ MAI-DxO (MAI Diagnostic Orchestrator) is a sophisticated AI-powered diagnostic s
 
 ## ✨ Key Features
 
-- **8 AI Physician Agents**: Specialized roles for comprehensive diagnosis.
+- **8 AI Physician Agents**: Specialized roles orchestrated through LangGraph state management.
 - **5 Operational Modes**: Instant, question-only, budgeted, no-budget, and ensemble modes.
+- **State-Managed Workflow**: LangGraph handles all state transitions and persistence automatically.
 - **Cost Tracking**: Real-time budget monitoring with costs for 25+ medical tests.
 - **Clinical Evaluation**: 5-point accuracy scoring with detailed feedback.
-- **Model Agnostic**: Works with GPT, Gemini, Claude, and other leading LLMs.
-- **Token-Optimized Prompts**: Ultra-compact role prompts reduce token usage and latency without sacrificing reasoning quality.
+- **Model Agnostic**: Works with GPT, Gemini, Claude, and other leading LLMs through LangChain.
+- **Graph-Based Architecture**: Declarative workflow definition with conditional routing and checkpointing.
 
 ## 🚀 Quick Start
 
 ### 1. Installation
 
-Install the package directly via pip:
+Clone the repository and install the requirements:
 
 ```bash
-pip install mai-dx
+git clone https://github.com/colinmyers/Open-MAI-Dx-Orchestrator-Langchain.git
+cd Open-MAI-Dx-Orchestrator-Langchain
+pip install -r requirements.txt
 ```
 
-Or, for development, clone the repository and install the requirements:
+For development mode:
 
 ```bash
-git clone https://github.com/The-Swarm-Corporation/Open-MAI-Dx-Orchestrator.git
-cd Open-MAI-Dx-Orchestrator
-pip install -r requirements.txt
+pip install -e .
 ```
 
 ### 2. Environment Setup
 
 Create a `.env` file in your project root and add your API keys:
 
-```txt
-OPENAI_API_KEY="Your OpenAI API key"
-GEMINI_API_KEY="Your Gemini API key"
-ANTHROPIC_API_KEY="Your Anthropic API key"
+```bash
+# Copy the example file
+cp .env.example .env
+
+# Edit .env and add your API keys:
+# GEMINI_API_KEY="your_gemini_api_key_here"
+# OPENAI_API_KEY="your_openai_api_key_here" 
+# ANTHROPIC_API_KEY="your_anthropic_api_key_here"
 ```
 
 ### 3. Basic Usage
@@ -87,7 +92,7 @@ orchestrator = MaiDxOrchestrator(
 
 ## 🏥 How It Works: The Virtual Physician Panel
 
-MAI-DxO employs a multi-agent system where each agent has a specific role:
+MAI-DxO employs a LangGraph-orchestrated multi-agent system where each agent operates as a graph node with state-aware processing:
 
 - **🧠 Dr. Hypothesis**: Maintains the differential diagnosis.
 - **🔬 Dr. Test-Chooser**: Selects the most cost-effective diagnostic tests.
@@ -127,27 +132,28 @@ If you use this work in your research, please cite both the original paper and t
 }
 
 @software{mai_dx_orchestrator,
-    title={Open-MAI-Dx-Orchestrator: An Open Source Implementation of Sequential Diagnosis with Language Models},
-    author={The-Swarm-Corporation},
+    title={Open-MAI-Dx-Orchestrator-Langchain: A LangGraph Implementation of Sequential Diagnosis with Language Models},
+    author={Colin Myers},
     year={2025},
-    url={https://github.com/The-Swarm-Corporation/Open-MAI-Dx-Orchestrator.git}
+    url={https://github.com/colinmyers/Open-MAI-Dx-Orchestrator-Langchain.git}
 }
 ```
 
 ## 🔗 Related Work
 
 - [Original Paper](https://arxiv.org/abs/2506.22405) - Sequential Diagnosis with Language Models
-- [Swarms Framework](https://github.com/kyegomez/swarms) - Multi-agent AI orchestration
+- [LangGraph](https://github.com/langchain-ai/langgraph) - State-managed multi-agent workflow orchestration
+- [LangChain](https://github.com/langchain-ai/langchain) - LLM application framework
 - [Microsoft Research](https://www.microsoft.com/en-us/research/) - Original research institution
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/The-Swarm-Corporation/Open-MAI-Dx-Orchestrator/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/The-Swarm-Corporation/Open-MAI-Dx-Orchestrator/discussions)
-- **Documentation**: [Full Documentation](https://docs.swarms.world)
+- **Issues**: [GitHub Issues](https://github.com/colinmyers/Open-MAI-Dx-Orchestrator-Langchain/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/colinmyers/Open-MAI-Dx-Orchestrator-Langchain/discussions)
+- **Documentation**: See CLAUDE.md for implementation details
 
 ---
 
 <p align="center">
-  <strong>Built with Swarms for advancing AI-powered medical diagnosis</strong>
+  <strong>Built with LangGraph for advancing AI-powered medical diagnosis</strong>
 </p>
