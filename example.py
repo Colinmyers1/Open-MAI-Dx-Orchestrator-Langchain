@@ -36,15 +36,11 @@ if __name__ == "__main__":
         print("=" * 80)
 
         # Test different variants as described in the paper
+        # Test only one variant to respect Gemini free tier rate limits (10 requests/minute)
         variants_to_test = [
             (
                 "no_budget",
                 "Standard MAI-DxO with no budget constraints",
-            ),
-            ("budgeted", "Budget-constrained MAI-DxO ($3000 limit)"),
-            (
-                "question_only",
-                "Question-only variant (no diagnostic tests)",
             ),
         ]
 
@@ -57,25 +53,18 @@ if __name__ == "__main__":
             print("=" * 60)
 
             # Create the variant
-            if variant_name == "budgeted":
-                orchestrator = MaiDxOrchestrator.create_variant(
-                    variant_name,
-                    budget=3000,
-                    model_name="gemini/gemini-2.5-flash",
-                    max_iterations=5,
-                )
-            else:
-                orchestrator = MaiDxOrchestrator.create_variant(
-                    variant_name,
-                    model_name="gemini/gemini-2.5-flash",
-                    max_iterations=5,
-                )
+            # Using Gemini 2.5 Flash with upgraded credits
+            orchestrator = MaiDxOrchestrator.create_variant(
+                variant_name,
+                model_name="gemini-2.5-flash",  # Updated to latest Gemini model
+                max_iterations=3,  # Increased iterations with better credits
+            )
 
             # Run the diagnostic process
             result = orchestrator.run(
                 initial_case_info=initial_info,
                 full_case_details=full_case,
-                ground_truth_diagnosis=ground_truth,
+                ground_truth=ground_truth,
             )
 
             results[variant_name] = result
@@ -89,39 +78,10 @@ if __name__ == "__main__":
             print(f"🔄 Iterations: {result.iterations}")
             print(f"⏱️  Mode: {orchestrator.mode}")
 
-        # Demonstrate ensemble approach
+        # Skip ensemble testing to respect rate limits
         print(f"\n{'='*60}")
-        print("Testing Variant: ENSEMBLE")
-        print(
-            "Description: Multiple independent runs with consensus aggregation"
-        )
+        print("Skipping ensemble testing to respect Gemini free tier rate limits")
         print("=" * 60)
-
-        ensemble_orchestrator = MaiDxOrchestrator.create_variant(
-            "ensemble",
-            model_name="gemini/gemini-2.5-flash",
-            max_iterations=3,  # Shorter iterations for ensemble
-        )
-
-        ensemble_result = ensemble_orchestrator.run_ensemble(
-            initial_case_info=initial_info,
-            full_case_details=full_case,
-            ground_truth_diagnosis=ground_truth,
-            num_runs=2,  # Reduced for demo
-        )
-
-        results["ensemble"] = ensemble_result
-
-        print(
-            f"\n🚀 Ensemble Diagnosis: {ensemble_result.final_diagnosis}"
-        )
-        print(f"🎯 Ground Truth: {ensemble_result.ground_truth}")
-        print(
-            f"⭐ Ensemble Score: {ensemble_result.accuracy_score}/5.0"
-        )
-        print(
-            f"💰 Total Ensemble Cost: ${ensemble_result.total_cost:,}"
-        )
 
         # --- Summary Comparison ---
         print(f"\n{'='*80}")

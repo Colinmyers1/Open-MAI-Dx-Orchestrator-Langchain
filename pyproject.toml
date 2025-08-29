@@ -23,9 +23,14 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
-swarms = "*"
+langgraph = "*"
+langchain = "*"
+langchain-openai = "*"
+langchain-anthropic = "*"
+langchain-google-genai = "*"
 loguru = "*"
 pydantic = "*"
+python-dotenv = "*"
 
 
 [tool.poetry.group.lint.dependencies]

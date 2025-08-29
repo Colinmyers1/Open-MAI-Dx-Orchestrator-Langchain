@@ -1,3 +1,8 @@
 loguru
-swarms
+langgraph
+langchain
+langchain-openai
+langchain-anthropic
+langchain-google-genai
 pydantic
+python-dotenv

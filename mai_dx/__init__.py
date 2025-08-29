@@ -1,12 +1,7 @@
 from typing import Any, Optional
 
-from mai_dx.main import (
-    MaiDxOrchestrator,
-    DiagnosisResult,
-    Action,
-    AgentRole,
-    run_mai_dxo_demo
-)
+from mai_dx.main import MaiDxOrchestrator
+from mai_dx.state import DiagnosisResult, DiagnosticAction as Action, AgentRole
 
 __version__ = "1.0.0"
 __author__ = "The Swarm Corporation"
@@ -18,7 +13,6 @@ __all__ = [
     "DiagnosisResult", 
     "Action",
     "AgentRole",
-    "run_mai_dxo_demo"
 ]
 
 # Convenience imports for common usage patterns
@@ -66,5 +60,5 @@ def quick_diagnosis(
     return orchestrator.run(
         initial_case_info=case_info,
         full_case_details=case_details,
-        ground_truth_diagnosis=ground_truth or "Unknown"
+        ground_truth=ground_truth or "Unknown"
     )
